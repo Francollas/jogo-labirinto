@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Labirinto Condicional</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .maze {
+            display: grid;
+            grid-template-columns: repeat(10, 40px);
+            grid-template-rows: repeat(10, 40px);
+            gap: 2px;
+            margin: 20px 0;
+        }
+        .cell {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            user-select: none;
+        }
+        .wall {
+            background-color: #333;
+        }
+        .path {
+            background-color: #fff;
+        }
+        .player {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+        .exit {
+            background-color: #e74c3c;
+            color: white;
+            font-weight: bold;
+        }
+        .blue {
+            background-color: #3498db;
+        }
+        .red {
+            background-color: #e74c3c;
+        }
+        .controls {
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .rules-panel {
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        select, input {
+            padding: 8px;
+            margin: 5px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        .message {
+            margin: 10px 0;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Labirinto Condicional</h1>
+        <p>Defina regras para alterar o labirinto e chegue à saída!</p>
+        
+        <div class="rules-panel">
+            <h3>Regras Condicionais</h3>
+            <p>Se o jogador tocar em: 
+                <select id="condition-color">
+                    <option value="blue">Azul</option>
+                    <option value="red">Vermelho</option>
+                </select>
+                então 
+                <select id="action-color">
+                    <option value="blue">Azul</option>
+                    <option value="red">Vermelho</option>
+                    <option value="wall">Parede</option>
+                    <option value="path">Caminho</option>
+                </select>
+                vira 
+                <select id="result-state">
+                    <option value="path">Caminho</option>
+                    <option value="wall">Parede</option>
+                </select>
+            </p>
+            <button onclick="addRule()">Adicionar Regra</button>
+            <div id="rules-list"></div>
+        </div>
+        
+        <div class="maze" id="maze"></div>
+        
+        <div class="controls">
+            <button onclick="movePlayer('up')">↑ Cima</button>
+            <button onclick="movePlayer('down')">↓ Baixo</button>
+            <button onclick="movePlayer('left')">← Esquerda</button>
+            <button onclick="movePlayer('right')">→ Direita</button>
+            <button onclick="resetGame()">Reiniciar</button>
+        </div>
+        
+        <div class="message" id="message"></div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
